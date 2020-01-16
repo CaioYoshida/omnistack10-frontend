@@ -68,7 +68,12 @@ li.dev-item a:hover {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #ddd
+  background: #ddd;
+  cursor: pointer;
+}
+
+.options:hover {
+  background: #ccc;
 }
 
 .options + .options {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdEdit, MdDelete } from 'react-icons/md';
 
 import './styles.css';
 
@@ -15,10 +16,10 @@ export default function Dev({dev}) {
         </div>
         <div className="dev-options">
           <button className="options">
-            U
+            <MdEdit size={20} color="#777" />
           </button>
           <button className="options">
-            D
+            <MdDelete size={20} color="#777" />
           </button>
         </div>
       </header>
