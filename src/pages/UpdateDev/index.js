@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import api from '../../services/axios';
 
 import './styles.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Update({ match }) {
   const [latitude, setLatitude] = useState(0);
@@ -30,21 +32,19 @@ export default function Update({ match }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    await api.put(`devs/${match.params.id}`, {
-      name: username,
-      bio,
-      techs,
-      latitude,
-      longitude
-    });
+    try {
+      await api.put(`devs/${match.params.id}`, {
+        name: username,
+        bio,
+        techs,
+        latitude,
+        longitude
+      });
 
-    console.log({
-      name: username,
-      bio,
-      techs,
-      latitude,
-      longitude
-    })
+      toast.success('Perfil atulizado com sucesso');
+    } catch(err) {
+      toast.error('Erro no servidor');
+    }
   }
 
   return (
