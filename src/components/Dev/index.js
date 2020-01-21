@@ -10,9 +10,8 @@ export default function Dev({ dev, handleDelete, history }) {
   }
 
   async function update(id) {
-    console.log(id);
 
-    history.push('/updatedevs');
+    history.push(`/updatedevs/${id}`);
   }
 
   return (

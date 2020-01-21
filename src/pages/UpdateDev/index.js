@@ -5,35 +5,52 @@ import api from '../../services/axios';
 
 import './styles.css';
 
-export default function Update() {
+export default function Update({ match }) {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
-  const [github_username, setGithub_username] = useState('');
+  const [username, setUsername] = useState('');
   const [techs, setTechs] = useState('');
+  const [bio, setBio] = useState('');
+  const [avatar_url, setAvatar_url] = useState('');
+
+  useEffect(() => {
+    async function loadDev() {
+      const response = await api.get(`devs/${match.params.id}`);
+
+      setUsername(response.data.name);
+      setTechs(response.data.techs.join(', '));
+      setBio(response.data.bio);
+      setLatitude(response.data.location.coordinates[1]);
+      setLongitude(response.data.location.coordinates[0]);
+      setAvatar_url(response.data.avatar_url);
+    }
+    loadDev();
+  }, [match.params.id])
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     console.log('ok');
-
-    setGithub_username('');
-    setTechs('');
   }
 
   return (
     <main>
-      <aside>
+      <aside className="updateForm">
         <strong>Update Profile</strong>
+
+        <div className="imgDiv">
+          <img src={avatar_url} alt={username}/>
+        </div>
 
         <form onSubmit={handleSubmit}>
           <div className="input-block">
-            <label htmlFor="github_username">Github User</label>
+            <label htmlFor="username">Username</label>
             <input 
-              name="github_username" 
-              htmlFor="github_username" 
+              name="username" 
+              htmlFor="username" 
               required
-              value={github_username}
-              onChange={event => setGithub_username(event.target.value)}
+              value={username}
+              onChange={event => setUsername(event.target.value)}
             />
           </div>
 
@@ -45,6 +62,17 @@ export default function Update() {
               required
               value={techs}
               onChange={event => setTechs(event.target.value)}
+            />
+          </div>
+
+          <div className="input-block">
+            <label htmlFor="bio">Bio</label>
+            <textarea 
+              name="bio" 
+              htmlFor="bio" 
+              required
+              value={bio}
+              onChange={event => setBio(event.target.value)}
             />
           </div>
 
@@ -76,7 +104,7 @@ export default function Update() {
           <button type="submit">
             Save
           </button>
-          <Link>
+          <Link to="/">
             Voltar
           </Link>
         </form>

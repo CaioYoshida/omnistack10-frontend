@@ -8,7 +8,7 @@ export default function Routes() {
   return (
     <Switch>
       <Route path="/" exact component={App} />
-      <Route path="/updatedevs" component={UpdateDev} />
+      <Route path="/updatedevs/:id" component={UpdateDev} />
     </Switch>
   );
 }
