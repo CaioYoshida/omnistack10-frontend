@@ -3,10 +3,16 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 
 import './styles.css';
 
-export default function Dev({ dev, handleDelete }) {
+export default function Dev({ dev, handleDelete, history }) {
 
   async function remove(id) {
     handleDelete(id);
+  }
+
+  async function update(id) {
+    console.log(id);
+
+    history.push('/updatedevs');
   }
 
   return (
@@ -21,7 +27,7 @@ export default function Dev({ dev, handleDelete }) {
         </div>
         <div className="dev-options">
           <button className="options">
-            <MdEdit size={20} color="#777" />
+            <MdEdit size={20} color="#777" onClick={() => update(dev._id)}/>
           </button>
           <button className="options" onClick={() => remove(dev._id)}>
             <MdDelete size={20} color="#777" />

@@ -9,7 +9,7 @@ import './Main.css';
 import Dev from '../../components/Dev';
 import DevForm from '../../components/DevForm';
 
-function App() {
+function App({ history }) {
   const [devs, setDevs] = useState([]);
   const [devsLength, setDevsLength] = useState(0);
 
@@ -47,7 +47,12 @@ function App() {
       <main>
         <ul>
           {devs.map(dev => (
-            <Dev key={dev._id} dev={dev} handleDelete={handleDelete} />
+            <Dev 
+              key={dev._id} 
+              dev={dev} 
+              handleDelete={handleDelete}
+              history={history}
+            />
           ))}
         </ul>
       </main>
