@@ -30,7 +30,21 @@ export default function Update({ match }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log('ok');
+    await api.put(`devs/${match.params.id}`, {
+      name: username,
+      bio,
+      techs,
+      latitude,
+      longitude
+    });
+
+    console.log({
+      name: username,
+      bio,
+      techs,
+      latitude,
+      longitude
+    })
   }
 
   return (
