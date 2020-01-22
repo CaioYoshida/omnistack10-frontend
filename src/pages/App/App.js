@@ -11,12 +11,16 @@ import Dev from '../../components/Dev';
 import DevForm from '../../components/DevForm';
 
 function App({ history }) {
+  const [loading, setLoading] = useState(false);
   const [devs, setDevs] = useState([]);
   const [devsLength, setDevsLength] = useState(0);
 
   async function handleSubmit(data) {
+    setLoading(true);
+
     const response = await api.post('/devs', data);
 
+    setLoading(false);
     setDevs([...devs, response.data]);
   }
 
@@ -50,7 +54,7 @@ function App({ history }) {
       <aside>
         <strong>Cadastrar</strong>
 
-        <DevForm  onSubmit={handleSubmit} />
+        <DevForm  onSubmit={handleSubmit} loading={loading}/>
       </aside>
       <main>
         <ul>

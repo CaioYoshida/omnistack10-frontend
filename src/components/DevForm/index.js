@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-// import { Container } from './styles';
+import { LoadingIcon } from './styles';
 
-export default function DevForm({ onSubmit }) {
+export default function DevForm({ onSubmit, loading }) {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   const [github_username, setGithub_username] = useState('');
@@ -89,7 +89,7 @@ export default function DevForm({ onSubmit }) {
       </div>
 
       <button type="submit">
-        Save
+        {loading ? <LoadingIcon size={16}/> : 'save'}
       </button>
     </form>
   );
