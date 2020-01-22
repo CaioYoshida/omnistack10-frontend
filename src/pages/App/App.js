@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import api from '../../services/axios';
 
 import '../../styles/global.css';
@@ -20,10 +21,17 @@ function App({ history }) {
   }
 
   async function handleDelete(id) {
-    await api.delete(`/devs/${id}`);
+    try {
+      await api.delete(`/devs/${id}`);
 
-    const response = await api.get('/devs');
-    setDevsLength(response.data.length);
+      const response = await api.get('/devs');
+      setDevsLength(response.data.length);
+
+      toast.success('Dev removido com sucesso');
+    } catch(err) {
+      toast.error('Erro no servidor');
+    }
+    
   }
 
   useEffect(() => {
